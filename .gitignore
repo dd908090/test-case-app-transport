@@ -1,0 +1,13 @@
+# app
+/app/vendor
+/app/.env
+/app/*.lst
+/app/bin/*
+!/app/bin/console
+
+
+docker/.env
+
+# ide
+.idea
+.vscode
