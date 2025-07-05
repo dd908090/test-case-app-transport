@@ -2,12 +2,14 @@
 
 namespace App\Entity\Transport;
 
+use App\Enum\TransportType;
+
 class SpecMachine extends Transport
 {
     private string $extra;
 
     public function __construct(
-        string $type,
+        TransportType $type,
         string $brand,
         string $photoFileName,
         string $extra,

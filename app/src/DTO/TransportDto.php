@@ -2,10 +2,12 @@
 
 namespace App\DTO;
 
+use App\Enum\TransportType;
+
 readonly class TransportDto
 {
     public function __construct(
-        public string $type,
+        public ?TransportType $type,
         public string $brand,
         public string $photo,
         public ?string $seats,

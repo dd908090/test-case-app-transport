@@ -2,6 +2,8 @@
 
 namespace App\Entity\Transport;
 
+use App\Enum\TransportType;
+
 class Truck extends Transport
 {
 
@@ -11,7 +13,7 @@ class Truck extends Transport
     private float $carrying;
 
     public function __construct(
-        string $type,
+        TransportType $type,
         string $brand,
         string $photoFileName,
         float $length,

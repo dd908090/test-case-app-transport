@@ -2,10 +2,13 @@
 
 namespace App\Entity\Transport;
 
+use App\Contract\TransportInterface;
+use App\Enum\TransportType;
+
 abstract class Transport implements TransportInterface
 {
     public function __construct(
-        protected string $type,
+        protected TransportType $type,
         protected string $brand,
         protected string $photoFileName,
     ) {
@@ -15,9 +18,9 @@ abstract class Transport implements TransportInterface
     }
 
     /**
-     * @return string
+     * @return TransportType
      */
-    public function getType(): string
+    public function getType(): TransportType
     {
         return $this->type;
     }

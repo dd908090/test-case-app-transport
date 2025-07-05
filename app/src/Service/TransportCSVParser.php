@@ -3,26 +3,30 @@
 namespace App\Service;
 
 use App\DTO\TransportDto;
-use League\Csv\Reader;
+use App\Enum\TransportType;
+use App\Factory\CSVReaderFactory;
 
-class TransportCsvParser
+class TransportCSVParser
 {
     public function __construct(
         private readonly string $fileStorage,
-        private TransportBuilder $builder
+        private TransportBuilder $builder,
+        private CSVReaderFactory $csvReaderFactory,
     ) {
     }
 
     public function parse(string $csvFileName): array
     {
-        $csvPath = sprintf('%s/%s', $this->fileStorage, $csvFileName);
         $results = [];
-        $csv = Reader::createFromPath($csvPath);
-        $csv->setHeaderOffset(0);
 
-        foreach ($csv->getRecords() as $row) {
+        $csvPath = sprintf('%s/%s', $this->fileStorage, $csvFileName);
+        $reader = $this->csvReaderFactory->createReader($csvPath);
+
+        foreach ($reader as $row) {
+            $type = TransportType::fromString($row['Тип'] ?? '');
+
             $dto = new TransportDto(
-                $row['Тип'] ?? null,
+                $type,
                 $row['Марка'] ?? null,
                 $row['Фото'] ?? null,
                 $row['Количество пассажирских мест'] ?? null,
@@ -32,7 +36,6 @@ class TransportCsvParser
             );
 
             $vehicle = $this->builder->build($dto);
-
             if ($vehicle) {
                 $results[] = $vehicle;
             }
@@ -40,5 +43,4 @@ class TransportCsvParser
 
         return $results;
     }
-
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Entity\Transport;
+namespace App\Contract;
+
+use App\Enum\TransportType;
 
 interface TransportInterface
 {
-    public function getType(): string;
+    public function getType(): TransportType;
 
     public function getBrand(): string;
 

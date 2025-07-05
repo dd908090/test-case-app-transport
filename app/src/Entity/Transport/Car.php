@@ -2,13 +2,15 @@
 
 namespace App\Entity\Transport;
 
+use App\Enum\TransportType;
+
 class Car extends Transport
 {
     private int $passengerSeatsCount;
     private float $carrying;
 
     public function __construct(
-        string $type,
+        TransportType $type,
         string $brand,
         string $photoFileName,
         int $passengerSeatsCount,

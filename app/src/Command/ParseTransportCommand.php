@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Service\TransportCsvParser;
+use App\Service\TransportCSVParser;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ParseTransportCommand extends Command
 {
     public function __construct(
-        private TransportCsvParser $parser
+        private TransportCSVParser $parser
     ) {
         parent::__construct('transport:parse');
     }
@@ -33,7 +33,7 @@ class ParseTransportCommand extends Command
         $transports = $this->parser->parse($filePath);
 
         foreach ($transports as $transport) {
-            dump($transport);
+            $output->writeln(print_r($transport, true));
         }
 
         return Command::SUCCESS;

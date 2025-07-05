@@ -2,19 +2,21 @@
 
 namespace App\Factory\TransportFactory;
 
+use App\Contract\TransportFactoryInterface;
 use App\DTO\TransportDto;
-use App\Entity\Transport\TransportInterface;
+use App\Entity\Transport\Transport;
 use App\Entity\Transport\Truck;
+use App\Enum\TransportType;
 
 class TruckFactory implements TransportFactoryInterface
 {
 
     public function supports(TransportDto $dto): bool
     {
-        return $dto->type === 'truck';
+        return $dto->type === TransportType::TRUCK;
     }
 
-    public function create(TransportDto $dto): TransportInterface
+    public function create(TransportDto $dto): Transport
     {
         [$length, $width, $height] = $this->parseDimensions($dto->dimensions);
 
